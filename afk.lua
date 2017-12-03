@@ -29,7 +29,7 @@ function AFK:Initialize()
 	self.AFKMode.bottom:SetPoint("BOTTOM", self.AFKMode, "CENTER", 0, 0)
 	self.AFKMode.bottom:SetWidth(GetScreenWidth())
 	self.AFKMode.bottom:SetHeight(GetScreenHeight() * (1 / 10))
-	
+
 	self.AFKMode.bottom.bg = CreateFrame("Frame", nil, self.AFKMode)
 	self.AFKMode.bottom.bg:SetTemplate("Transparent")
 	self.AFKMode.bottom.bg:SetSize(400, 100)
@@ -38,37 +38,38 @@ function AFK:Initialize()
 	self.AFKMode.bottom.name = self.AFKMode.bottom:CreateFontString(nil, 'OVERLAY')
 	self.AFKMode.bottom.name:FontTemplate(nil, 20, "OUTLINE")
 	self.AFKMode.bottom.name:SetText(E.myname)
-	self.AFKMode.bottom.name:SetPoint("CENTER", 0, 0)
+	self.AFKMode.bottom.name:SetPoint("CENTER", -30, -20)
 	self.AFKMode.bottom.name:SetTextColor(classColor.r, classColor.g, classColor.b)
 
 	self.AFKMode.bottom.guild = self.AFKMode.bottom:CreateFontString(nil, 'OVERLAY')
 	self.AFKMode.bottom.guild:FontTemplate(nil, 20, "OUTLINE")
 	self.AFKMode.bottom.guild:SetText(L["No Guild"])
-	self.AFKMode.bottom.guild:SetPoint("TOPLEFT", self.AFKMode.bottom.name, "BOTTOMLEFT", 0, -6)
-	self.AFKMode.bottom.guild:SetTextColor(0.7, 0.7, 0.7)
+	self.AFKMode.bottom.guild:SetPoint("TOPLEFT", self.AFKMode.bottom.name, "BOTTOMLEFT", 0, -5)
+	self.AFKMode.bottom.guild:SetTextColor(64/255, 251/255, 64/255)
 
 	self.AFKMode.bottom.time = self.AFKMode.bottom:CreateFontString(nil, 'OVERLAY')
 	self.AFKMode.bottom.time:FontTemplate(nil, 20, "OUTLINE")
 	self.AFKMode.bottom.time:SetText("00:00")
-	self.AFKMode.bottom.time:SetPoint("TOPLEFT", self.AFKMode.bottom.guild, "BOTTOMLEFT", 0, -6)
-	self.AFKMode.bottom.time:SetTextColor(0.7, 0.7, 0.7)
+	self.AFKMode.bottom.time:SetPoint("TOPLEFT", self.AFKMode.bottom.guild, "BOTTOMLEFT", 0, -5)
+	self.AFKMode.bottom.time:SetTextColor(classColor.r, classColor.g, classColor.b)
 
 	self.AFKMode.bottom.model = CreateFrame("PlayerModel", "ElvUIAFKPlayerModel", self.AFKMode.bottom)
-	self.AFKMode.bottom.model:SetPoint("CENTER", -300, 0)
+	self.AFKMode.bottom.model:SetPoint("CENTER", -2000, 0)
 	self.AFKMode.bottom.model:SetSize(800, 800)
 	self.AFKMode.bottom.model:SetCamDistanceScale(1.15)
 	self.AFKMode.bottom.model:SetFacing(6)
-	self.AFKMode.bottom.model:SetScript("OnUpdate", function(self) 
+	self.AFKMode.bottom.model:SetScript("OnUpdate", function(self)
 		local timePassed = GetTime() - self.startTime
 		if(timePassed > self.duration) and self.isIdle ~= true then
 			self:SetAnimation(0)
 			self.isIdle = true
 			AFK.animTimer = AFK:ScheduleTimer("LoopAnimations", self.idleDuration)
 		end
+
 	end)
 
 	self:Toggle()
-	self.isActive = false	
+	self.isActive = false
 end
 
 
