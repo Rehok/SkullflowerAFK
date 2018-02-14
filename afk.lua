@@ -1,5 +1,3 @@
-test
--- Testing git commands 
 local E, L, V, P, G, _ = unpack(ElvUI); --Inport: Engine, Locales, PrivateDB, ProfileDB, GlobalDB, Localize Underscore
 local AFK = E:GetModule('AFK', 'AceEvent-3.0', 'AceTimer-3.0');
 local AFKString = _G["AFK"]
